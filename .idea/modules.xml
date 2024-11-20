@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LongestPath_ACO.iml" filepath="$PROJECT_DIR$/.idea/LongestPath_ACO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/longestpath_aco.iml" filepath="$PROJECT_DIR$/.idea/longestpath_aco.iml" />
     </modules>
   </component>
 </project>
