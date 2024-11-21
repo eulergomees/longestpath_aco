@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 # -----------------------------------------------------------------------------------------------
+# Parametros do ACO
 base = 'A'
 
 if base == 'A':
@@ -19,19 +20,17 @@ if base == 'C':
     vinicial = 1
     vfinal = 100
 
-num_formigas = 40  # Número de formigas
-fer_inicial = 0.01  # Feromônio inicial
-maxit = 100  # Número máximo de iterações
-evaporacao = 0.07  # Taxa de evaporação
-alpha = 1  # Peso para o feromônio
-beta = 2  # Peso para a visibilidade (inverso do custo)
-rho = 0.1  # Taxa de evaporação do feromônio
-
-
-# Defina o nó inicial e final
+alpha = 0.5  # Influência do feromônio
+beta = 0.5  # influência da heurística
+rho = 0.05  # Taxa de evaporação
+Q = 10  # Feromonio depositada pelas formigas
+t_inicial = 0.01  # Feromonio inicial
+lim_iter = 500  # Maximo de iterações
+num_formigas = 40 #numero de formigas
 
 
 # -----------------------------------------------------------------------------------------------
+# Grafo e leitura do .CSV
 # Ler o CSV
 def ler_csv(nome_arquivo):
     df = pd.read_csv(nome_arquivo)
@@ -55,13 +54,20 @@ def plota_grafo(Grafo):
     nx.draw_networkx_labels(Grafo, pos)
     return plt.show()
 
+# -----------------------------------------------------------------------------------------------
+# Inicializa matriz de feromonios
+def inicializa_matriz_feromonios(Grafo, feromonio_inicial):
+    matriz_feromonios = {edge: feromonio_inicial for edge in Grafo.edges}
+    return matriz_feromonios
+
 
 # -----------------------------------------------------------------------------------------------
+# ACO
 
 # -----------------------------------------------------------------------------------------------
-# Leitura do grafo
+# Execução
 G = ler_csv(grafo_csv)
-print(G)
+print(inicializa_matriz_feromonios(G, t_inicial))
 
 # Plota o grafo
 plota_grafo(G)
