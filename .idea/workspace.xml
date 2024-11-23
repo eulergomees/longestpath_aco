@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ff342744-cb3c-4cc8-af0a-85c776e1b347" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grafo1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/grafo1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grafo2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/grafo2.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +99,8 @@
       <workItem from="1732187654401" duration="5107000" />
       <workItem from="1732208216764" duration="612000" />
       <workItem from="1732283655871" duration="6147000" />
-      <workItem from="1732300154438" duration="1160000" />
+      <workItem from="1732300154438" duration="1249000" />
+      <workItem from="1732301681735" duration="837000" />
     </task>
     <servers />
   </component>
@@ -114,8 +113,8 @@
     <SUITE FILE_PATH="coverage/longestpath_aco$version_02.coverage" NAME="version_02 Coverage Results" MODIFIED="1732296665698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/longestpath_aco$teste.coverage" NAME="teste Coverage Results" MODIFIED="1732128596777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/longestpath_aco$fhsdfh.coverage" NAME="fhsdfh Coverage Results" MODIFIED="1732300250652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/longestpath_aco$main.coverage" NAME="main Coverage Results" MODIFIED="1732297038808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/longestpath_aco$melhor.coverage" NAME="melhor Coverage Results" MODIFIED="1732301282087" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/longestpath_aco$main.coverage" NAME="main Coverage Results" MODIFIED="1732302470553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/longestpath_aco$melhor.coverage" NAME="melhor Coverage Results" MODIFIED="1732302439746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/longestpath_aco$version_01.coverage" NAME="version_01 Coverage Results" MODIFIED="1732296861250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/longestpath_aco$test.coverage" NAME="test Coverage Results" MODIFIED="1732295623433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
