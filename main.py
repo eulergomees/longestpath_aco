@@ -22,7 +22,7 @@ def escolher_grafo(base):
         "A": ("data/exemplo_slides.csv", 1, 4),
         "B": ("data/grafo1.csv", 1, 12),
         "C": ("data/grafo2.csv", 1, 20),
-        "D": ("data/grafo3.csv", 1, 100),
+        "D": ("data/grafo3_processed.csv", 1, 100),
     }
     if base not in bases:
         raise ValueError('Não existe grafo!')
