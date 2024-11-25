@@ -13,7 +13,7 @@ maxit = 500
 num_formigas = 50
 
 # Escolher o CSV
-base = 'B'
+base = 'D'
 
 
 # Escolhe le o CSV e seleciona o vinicial e vfinal
