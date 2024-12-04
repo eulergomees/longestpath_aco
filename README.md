@@ -7,5 +7,3 @@ Codigo feito em python que resolve o problema do caminho mais longo utilizano o 
 ## Autores
 
 - [@eulergomees](https://www.github.com/eulergomees)
-
-# LongestPath_ACO

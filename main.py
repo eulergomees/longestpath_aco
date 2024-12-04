@@ -7,13 +7,13 @@ from multiprocessing import Pool, cpu_count
 
 
 # Parametros
-fer_inicial = 0.01
-rho = 0.07  # Evaporação
-maxit = 500
+fer_inicial = 0.1
+rho = 0.05  # Evaporação
+maxit = 300
 num_formigas = 50
 
 # Escolher o CSV
-base = 'D'
+base = 'C'
 
 
 # Escolhe le o CSV e seleciona o vinicial e vfinal
