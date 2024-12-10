@@ -2,14 +2,16 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import time
 
 # ------------------------------- VARIÁVEIS -------------------------------------
 feromonio_inicial = 0.01
 taxa_evaporacao = 0.07
 maximo_iteracao = 200
 quantidade_formigas = 80
-quantidade_execucoes = 1
+quantidade_execucoes = 2
 base_csv = "A"
+
 
 # ------------------------- FUNÇÃO CSV ------------------------------------------
 def carregar_base(base):
@@ -28,6 +30,7 @@ def carregar_base(base):
     else:
         raise ValueError("Base inválida.")
     return arquivo_csv, vinicial, vfinal, nome_base
+
 
 # ----- DADOS CARREGADOS --------
 arquivo_csv, vinicial, vfinal, nome_base = carregar_base(base_csv)
@@ -49,7 +52,8 @@ melhor_caminho = None
 custo_melhor_caminho = np.inf
 custos_expcorrente = []
 
-# ----------------- Execução --------------------------------------------------
+# ----------------- Execução(menor caminho) --------------------------------------------------
+start_time = time.time()
 for nexp in range(quantidade_execucoes):
     for iteracao in range(maximo_iteracao):
         caminhos = []
@@ -102,23 +106,43 @@ for nexp in range(quantidade_execucoes):
 
         custos_expcorrente.append(custo_melhor_caminho)
 
+end_time = time.time()
+execution_time = end_time - start_time
 # ----------------- Resultados Finais ------------------------------------------
 print(f"Quantidade de execuções: {quantidade_execucoes}")
 print(f"Melhor caminho: {', '.join(map(str, melhor_caminho))}")
 print(f"Custo do melhor caminho: {custo_melhor_caminho}")
 print(f"Custo médio: {np.mean([c for c in custos if c < np.inf])}")
+print(f"Tempo de execução: {execution_time:.4f} segundos")
 
 # ----------------- Visualização -----------------------------------------------
-# ----------------- Visualização -----------------------------------------------
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(10, 7))
+# Ajustar posiçoes
+pos = nx.spring_layout(grafo, seed=42)
 
-# Gerar posições dos nós
-pos = nx.spring_layout(grafo, seed=42)  # Define um layout com posições fixas para visualização consistente
+# Destacar arestas do melhor caminho
+edges_melhor_caminho = [(melhor_caminho[i], melhor_caminho[i + 1]) for i in range(len(melhor_caminho) - 1)]
+edge_colors = ["red" if edge in edges_melhor_caminho or edge[::-1] in edges_melhor_caminho else "gray" for edge in
+               grafo.edges()]
+edge_widths = [3 if edge in edges_melhor_caminho or edge[::-1] in edges_melhor_caminho else 1 for edge in grafo.edges()]
 
-# Desenhar o grafo completo
-nx.draw_networkx(grafo, pos, with_labels=True, node_color="lightblue", edge_color="gray", node_size=700, font_size=10)
+# Plotar o grafo
+nx.draw(
+    grafo,
+    pos,
+    with_labels=True,
+    node_size=700,
+    node_color="skyblue",
+    font_size=10,
+    edge_color=edge_colors,
+    width=edge_widths
+)
+nx.draw_networkx_edge_labels(
+    grafo,
+    pos,
+    edge_labels=nx.get_edge_attributes(grafo, "weight")
+)
 
-# Destacar o melhor caminho, se existir
 if melhor_caminho:
     edges = [(melhor_caminho[i], melhor_caminho[i + 1]) for i in range(len(melhor_caminho) - 1)]
     nx.draw_networkx_edges(grafo, pos, edgelist=edges, edge_color="red", width=2)
@@ -127,13 +151,12 @@ if melhor_caminho:
 plt.title(nome_base)
 plt.show()
 
-
 # Gráfico de Convergência
-plt.figure(figsize=(10, 6))
-plt.plot(range(len(custos_expcorrente)), custos_expcorrente, label="Custo do Melhor Caminho")
-plt.xlabel("Iteração")
-plt.ylabel("Custo do Melhor Caminho")
-plt.title("Convergência do ACO")
-plt.legend()
-plt.grid()
-plt.show()
+# plt.figure(figsize=(10, 6))
+# plt.plot(range(len(custos_expcorrente)), custos_expcorrente, label="Custo do Melhor Caminho")
+# plt.xlabel("Iteração")
+# plt.ylabel("Custo do Melhor Caminho")
+# plt.title("Convergência do ACO")
+# plt.legend()
+# plt.grid()
+# plt.show()

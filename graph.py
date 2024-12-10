@@ -3,6 +3,7 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 from multiprocessing import Pool, cpu_count
+import time
 
 # ------------------------ VARIÁVEIS -----------------------------------
 feromonio_inicial = 0.01
@@ -12,32 +13,31 @@ quantidade_formigas = 80
 quantidade_execucoes = 1
 base_csv = "A"
 
-
 # ------------------------- FUNÇÃO CSV ---------------------------------
 def carregar_base(base):
     if base == "A":
         arquivo_csv = pd.read_csv("data/grafo1.csv")
         vinicial, vfinal = 1, 12
-        nomebase = "Grafo A - 12 vértices e 25 arestas"
+        nome_base = "Grafo A - 12 vértices e 25 arestas"
     elif base == "B":
         arquivo_csv = pd.read_csv("data/grafo2.csv")
         vinicial, vfinal = 1, 20
-        nomebase = "Grafo B - 20 vértices e 190 arestas"
+        nome_base = "Grafo B - 20 vértices e 190 arestas"
     elif base == "C":
         arquivo_csv = pd.read_csv("data/grafo3.csv")
         vinicial, vfinal = 1, 100
-        nomebase = "Grafo C - 100 vértices e 8020 arestas"
+        nome_base = "Grafo C - 100 vértices e 8020 arestas"
     elif base == "D":
         arquivo_csv = pd.read_csv("data/exemplo_slides.csv")
         vinicial, vfinal = 1, 4
-        nomebase = "Grafo D"
+        nome_base = "Grafo D"
     else:
         raise ValueError("Base inválida")
-    return arquivo_csv, vinicial, vfinal, nomebase
+    return arquivo_csv, vinicial, vfinal, nome_base
 
 
 # Carregar dados
-arquivo_csv, vinicial, vfinal, nomebase = carregar_base(base_csv)
+arquivo_csv, vinicial, vfinal, nome_base = carregar_base(base_csv)
 
 # Separar as colunas em listas
 origens = arquivo_csv["origem"].values
@@ -49,12 +49,14 @@ grafo = nx.Graph()
 for origem, destino, peso in zip(origens, destinos, pesos):
     grafo.add_edge(origem, destino, weight=peso)
 
-# --------------------- Algoritmo ACO -----------------------------------
+# --------------------- Algoritmo ACO Longest Path -----------------------------------
 todos_custos = np.zeros((quantidade_execucoes, quantidade_formigas))
 custos_expcorrente = np.zeros(maximo_iteracao)
 
 melhor_caminho = []
 custo_melhor_caminho = -np.inf
+
+start_time = time.time()
 
 for nexp in range(quantidade_execucoes):
     feromonio = np.full(len(origens), feromonio_inicial)
@@ -119,18 +121,19 @@ for nexp in range(quantidade_execucoes):
 
     todos_custos[nexp, :] = custos
 
+end_time = time.time()
+execution_time = end_time - start_time
 # ----------------- Resultados Finais -----------------------------------
-print("\nResultados Finais")
-print("Quantidade de execuções:", quantidade_execucoes)
-print("Melhor caminho:", melhor_caminho)
-print("Custo do melhor caminho:", custo_melhor_caminho)
-print("Custo médio:", np.mean(todos_custos[todos_custos > -np.inf]))
+print(f"Quantidade de execuções: {quantidade_execucoes}")
+print(f"Melhor caminho: {', '.join(map(str, melhor_caminho))}")
+print(f"Custo do melhor caminho: {custo_melhor_caminho}")
+print(f"Custo médio: {np.mean([c for c in custos if c < np.inf])}")
+print(f"Tempo de execução: {execution_time:.4f} segundos")
 
 # ------------------- Destacar Melhor Caminho no Grafo -------------------
 plt.figure(figsize=(10, 7))
-
-# Ajustar layout
-pos = nx.spring_layout(grafo)
+# Ajustar posiçoes
+pos = nx.spring_layout(grafo, seed=42)
 
 # Destacar arestas do melhor caminho
 edges_melhor_caminho = [(melhor_caminho[i], melhor_caminho[i + 1]) for i in range(len(melhor_caminho) - 1)]
@@ -154,15 +157,21 @@ nx.draw_networkx_edge_labels(
     pos,
     edge_labels=nx.get_edge_attributes(grafo, "weight")
 )
-plt.title("Melhor Caminho Destacado no Grafo")
+
+if melhor_caminho:
+    edges = [(melhor_caminho[i], melhor_caminho[i + 1]) for i in range(len(melhor_caminho) - 1)]
+    nx.draw_networkx_edges(grafo, pos, edgelist=edges, edge_color="red", width=2)
+
+# Título do grafo
+plt.title(nome_base)
 plt.show()
 
 # Gráfico de convergência
-plt.figure(figsize=(10, 5))
-plt.plot(range(1, maximo_iteracao + 1), custos_expcorrente, label="Melhor Custo")
-plt.title("Convergência do ACO")
-plt.xlabel("Iteração")
-plt.ylabel("Custo do Melhor Caminho")
-plt.legend()
-plt.grid(True)
-plt.show()
+# plt.figure(figsize=(10, 5))
+# plt.plot(range(1, maximo_iteracao + 1), custos_expcorrente, label="Melhor Custo")
+# plt.title("Convergência do ACO")
+# plt.xlabel("Iteração")
+# plt.ylabel("Custo do Melhor Caminho")
+# plt.legend()
+# plt.grid(True)
+# plt.show()
